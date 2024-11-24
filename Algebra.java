@@ -6,29 +6,36 @@
 public class Algebra {
 	public static void main(String args[]) {
 	    // Tests some of the operations
-	    System.out.println(plus(2,3));   // 2 + 3
-	    System.out.println(minus(7,2));  // 7 - 2
-   		System.out.println(minus(2,7));  // 2 - 7
- 		System.out.println(times(3,4));  // 3 * 4
-   		System.out.println(plus(2,times(4,2)));  // 2 + 4 * 2
-   		System.out.println(pow(5,3));      // 5^3
-   		System.out.println(pow(3,5));      // 3^5
-   		System.out.println(div(12,3));   // 12 / 3    
-   		System.out.println(div(5,5));    // 5 / 5  
-   		System.out.println(div(25,7));   // 25 / 7
-   		System.out.println(mod(25,7));   // 25 % 7
-   		System.out.println(mod(120,6));  // 120 % 6    
-   		System.out.println(sqrt(36));
-		System.out.println(sqrt(263169));
-   		System.out.println(sqrt(76123));
+	    // System.out.println(plus(2,-3));   // 2 + 3
+	    // System.out.println(minus(7,2));  // 7 - 2
+   		// System.out.println(minus(2,-7));  // 2 -- 7
+		// System.out.println(minus(-2,7));  // 2 - 7
+ 		System.out.println(times(4,5));  // 3 * 4
+   		// System.out.println(plus(2,times(4,2)));  // 2 + 4 * 2
+   		// System.out.println(pow(5,3));      // 5^3
+   		// System.out.println(pow(3,5));      // 3^5
+   		// System.out.println(div(12,3));   // 12 / 3    
+   		// System.out.println(div(5,5));    // 5 / 5  
+   		// System.out.println(div(25,7));   // 25 / 7
+   		// System.out.println(mod(25,7));   // 25 % 7
+   		// System.out.println(mod(120,6));  // 120 % 6    
+   		// System.out.println(sqrt(36));
+		// System.out.println(sqrt(263169));
+   		// System.out.println(sqrt(76123));
 	}  
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
 		/** this method gets two integers and returns the addition result of them */
 		int result = x1;
-		for (int i = 0; i < x2; i++) {
-			result++;
+		if (x2 < 0) {
+			for (int i = 0; i < -x2; i++) {
+				result--;
+			}
+		} else {
+			for (int i = 0; i < x2; i++) {
+				result++;
+			}
 		}
 		return result;
 	}
@@ -37,8 +44,14 @@ public class Algebra {
 	public static int minus(int x1, int x2) {
 		/** this method gets two integers and returns the substracution of the second argument from the first */
 		int result = x1;
-		for (int i =0; i < x2; i++) {
-			result--;
+		if (x2 < 0) {
+			for (int i = 0; i < -x2; i++) {
+				result++;
+			}
+		} else {
+			for (int i = 0; i < x2; i++) {
+				result--;
+			}
 		}
 		return result;
 	}
@@ -47,9 +60,18 @@ public class Algebra {
 	public static int times(int x1, int x2) {
 		/** this method get two integers and returns the multiplication result */
 		int result = 0;
-		for (int i = 0; i < x2; i++) {
-			result += x1;
+		int x1positive = x1;
+		int x2positive = x2;
+		if (x1 == 0 || x2 == 0) return result;
+
+		if (x1 < 0) x1positive = -x1positive;
+		if (x2 < 0) x2positive = -x2positive;
+
+		for (int i = 0; i < x2positive; i++) {
+			result += x1positive;
 		}
+
+		if (!((x1 < 0 && x2 < 0) || (x2 > 0 && x1 > 0))) result = -result;
 		return result;
 	}
 
@@ -57,6 +79,8 @@ public class Algebra {
 	public static int pow(int x, int n) {
 		/** this method get two integers x and n and returns the result of x in the power of n*/
 		int result = x;
+		if (n == 0) return 1;
+		
 		for (int i = 0; i < n - 1; i++) {
 			result *= x;
 		}
@@ -83,7 +107,12 @@ public class Algebra {
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		// Replace the following statement with your code
-		return 0;
+		/** this func gets a number and returns its squre */
+		if (x == 0 || x == 1) return x;
+        int result = 0;
+        while (times(result, result) <= x) {
+            result++;
+        }
+        return minus(result, 1); // 
 	}	  	  
 }
