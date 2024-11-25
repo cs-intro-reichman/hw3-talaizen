@@ -28,8 +28,25 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		// Replace the following statement with your code
-		return false;
+		str1 = preProcess(str1);
+		str2 = preProcess(str2);
+
+		if (str1.length() != str2.length()) return false;
+
+		for (int i = 0; i < str1.length(); i++){
+			char current_char = str1.charAt(i);
+			int ascii_value = (int) current_char;
+			int ascii_counter_1 = 0;
+			int ascii_counter_2 = 0;
+
+			for (int j = 0; j < str1.length(); j++){
+				if ((int) str1.charAt(j) == ascii_value) ascii_counter_1++;
+				if ((int) str2.charAt(j) == ascii_value) ascii_counter_2++;
+			}
+			
+			if (ascii_counter_1 != ascii_counter_2) return false;
+		}  
+		return true;
 	}
 	   
 	// Returns a preprocessed version of the given string: all the letter characters are converted
@@ -37,13 +54,28 @@ public class Anagram {
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
 		// Replace the following statement with your code
-		return "";
+		String finalWord = "";
+		for (int i = 0; i < str.length(); i ++){
+			char current_char = str.charAt(i);
+			int ascii_value = (int) current_char;
+			if (ascii_value >= 97 && ascii_value <= 122) finalWord += current_char;
+			if (ascii_value >= 65 && ascii_value <= 90) finalWord += (char) (ascii_value + 32);
+		}
+		return finalWord;
 	} 
 	   
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
-		// Replace the following statement with your code
-		return "";
+		String randAn = "";
+		int strLength = str.length();
+		for (int i = 0; i < strLength; i++){
+			int randomIndex = (int) (Math.random() * str.length());
+			System.out.println(randomIndex);
+			randAn += str.charAt(randomIndex);
+			if (randomIndex == str.length()) str = str.substring(0, randomIndex);
+			else str = str.substring(0, randomIndex) + str.substring(randomIndex + 1);
+		}
+		return randAn;
 	}
 }
