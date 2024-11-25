@@ -33,10 +33,10 @@ public class Algebra {
 		// System.out.println(mod(-25,7));   
    		// System.out.println(mod(-120,-6));  
    		// System.out.println(sqrt(36));
-		System.out.println(sqrt(263169));
-   		System.out.println(sqrt(76123));
-		System.out.println(sqrt(16));
-		System.out.println(sqrt(10));
+		// System.out.println(sqrt(263169));
+   		// System.out.println(sqrt(76123));
+		// System.out.println(sqrt(16));
+		// System.out.println(sqrt(10));
 	}  
 
 	// Returns x1 + x2
@@ -59,7 +59,19 @@ public class Algebra {
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
 		/** this method gets two integers and returns the substracution of the second argument from the first */
-		return plus(x1, -x2);
+		int opposite = 0;
+		if (x2 > 0) {
+			while (x2 != 0) {
+				opposite--;
+				x2--;
+			}
+		} else {
+			while (x2 != 0) {
+				opposite++;
+				x2++;
+			}
+		}
+		return plus(x1, opposite);
 	}
 
 	// Returns x1 * x2
@@ -68,8 +80,8 @@ public class Algebra {
 		int result = 0;
 		int base = x1;
 		if (x2 < 0) {
-			base = -x1;
-			x2 = -x2;
+			base = minus(0, x1);
+			x2 = minus(0, x2);
 		}
 		while (x2 != 0) {
 			result = plus(result, base);
@@ -96,8 +108,8 @@ public class Algebra {
 	public static int div(int x1, int x2) {
 		/** this func gets two intergers x1, x2 and returns the integer part of x1 / x2 */
 		int result = 0;
-		int absX1 = (x1 < 0) ? -x1 : x1;
-		int absX2 = (x2 < 0) ? -x2 : x2;
+		int absX1 = (x1 < 0) ? minus(0, x1) : x1;
+		int absX2 = (x2 < 0) ? minus(0, x2) : x2;
 
 		while (absX1 >= absX2) {
 			absX1 -= absX2;
@@ -105,7 +117,7 @@ public class Algebra {
 		}
 
 		if ((x1 < 0 && x2 > 0) || (x1 > 0 && x2 < 0)) {
-			result = -result;
+			result = minus(0, result);
 		}
 
 		return result;
@@ -130,7 +142,7 @@ public class Algebra {
     	int square = 1;
 		while (true) {
 			if (square == x) return result;
-			else if (square > x) return result - 1;
+			else if (square > x) return minus(result, 1);
 
 			result ++;
 			square = times(result, result);
