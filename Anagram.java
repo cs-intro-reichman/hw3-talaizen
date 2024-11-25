@@ -58,7 +58,7 @@ public class Anagram {
 		for (int i = 0; i < str.length(); i ++){
 			char current_char = str.charAt(i);
 			int ascii_value = (int) current_char;
-			if (ascii_value >= 97 && ascii_value <= 122) finalWord += current_char;
+			if ((ascii_value == 32) || (ascii_value >= 97 && ascii_value <= 122)) finalWord += current_char;
 			if (ascii_value >= 65 && ascii_value <= 90) finalWord += (char) (ascii_value + 32);
 		}
 		return finalWord;
