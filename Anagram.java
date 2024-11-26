@@ -11,9 +11,9 @@ public class Anagram {
 		// System.out.println(preProcess("What? No way!!!"));
 		
 		// // Tests the randomAnagram function.
-		// System.out.println("silent and " + randomAnagram("silent") + " are anagrams.");
+		System.out.println("silent and " + randomAnagram("silent") + " are anagrams.");
 		
-		// // Performs a stress test of randomAnagram 
+		// Performs a stress test of randomAnagram 
 		// String str = "1234567";
 		// Boolean pass = true;
 		// //// 10 can be changed to much larger values, like 1000
@@ -26,17 +26,14 @@ public class Anagram {
 		// System.out.println(pass ? "test passed" : "test Failed");
 
 
-		System.out.println(isAnagram("William Shakespeare", "I am a weakish speller"));
+		// System.out.println(isAnagram("William Shakespeare", "I am a weakish speller"));
 	}  
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
 		str1 = preProcess(str1);
 		str2 = preProcess(str2);
-		// System.out.println(str1 + " " + str2);
-		// int iterationNum = 0;
 		if (str1.length() != str2.length()) return false;
-		// iterationNum = (str1.length() > str2.length()) ? str1.length() : str2.length();
 
 		for (int i = 0; i < str1.length(); i++){
 			char current_char = str1.charAt(i);
@@ -76,13 +73,24 @@ public class Anagram {
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
+		// String randAn = "";
+		// int strLength = str.length();
+		// for (int i = 0; i < strLength; i++){
+		// 	int randomIndex = (int) (Math.random() * str.length());
+		// 	randAn += str.charAt(randomIndex);
+		// 	if (randomIndex == str.length()) str = str.substring(0, randomIndex);
+		// 	else str = str.substring(0, randomIndex) + str.substring(randomIndex + 1);
+		// }
+		// return randAn;
 		String randAn = "";
-		int strLength = str.length();
-		for (int i = 0; i < strLength; i++){
-			int randomIndex = (int) (Math.random() * str.length());
-			randAn += str.charAt(randomIndex);
-			if (randomIndex == str.length()) str = str.substring(0, randomIndex);
-			else str = str.substring(0, randomIndex) + str.substring(randomIndex + 1);
+		while (str.length() > 0) {
+			String partialStr = "";
+			int index = (int) (Math.random() * str.length());
+			randAn += str.charAt(index);
+			for(int i = 0; i < str.length(); i++){
+				if (i != index) partialStr += str.charAt(i);
+			}
+			str = partialStr;
 		}
 		return randAn;
 	}
