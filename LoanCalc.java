@@ -16,7 +16,7 @@ public class LoanCalc {
 
 		// Computes the periodical payment using brute force search
 		System.out.print("\nPeriodical payment, using brute force: ");
-		System.out.println((int) bruteForceSolver(100000, 5, 10, epsilon));
+		System.out.println((int) bruteForceSolver(loan, rate, n, epsilon));
 		System.out.println("number of iterations: " + iterationCounter);
 
 		// Computes the periodical payment using bisection search
@@ -67,7 +67,7 @@ public class LoanCalc {
 		double endBalanceL = 0;
 		double endBalanceG = 0;
 
-		while ((H - L) > epsilon) {
+		while (Math.abs(H - L) > epsilon) {
 			endBalanceG = endBalance(loan, rate, n, g);
 			endBalanceL = endBalance(loan, rate, n, L);
 			if ((endBalanceG * endBalanceL) > 0) L = g;
